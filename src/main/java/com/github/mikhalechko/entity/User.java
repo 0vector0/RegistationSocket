@@ -1,13 +1,29 @@
-package com.github.mikhalechko.entiry;
+package com.github.mikhalechko.entity;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 @Component
+@Entity(name = "myUsers")
 public class User {
 
+    @Id
+    @GeneratedValue
+    private Long id;
     private String name;
     private String login;
     private String password;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;

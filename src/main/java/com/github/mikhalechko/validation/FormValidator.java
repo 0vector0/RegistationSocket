@@ -1,6 +1,6 @@
 package com.github.mikhalechko.validation;
 
-import com.github.mikhalechko.entiry.User;
+import com.github.mikhalechko.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

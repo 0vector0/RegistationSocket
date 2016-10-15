@@ -1,6 +1,7 @@
 package com.github.mikhalechko.controller;
 
-import com.github.mikhalechko.entiry.User;
+import com.github.mikhalechko.dao.UserDao;
+import com.github.mikhalechko.entity.User;
 import com.github.mikhalechko.validation.FormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @SessionAttributes(types = User.class)
 //@RequestMapping("/")
@@ -19,6 +22,10 @@ public class RegistrationController {
 
     @Autowired
     FormValidator formValidator;
+    @Autowired
+    UserDao userDao;
+    @Autowired
+    HttpSession session;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String getRegistrationForm(Model model) {
@@ -41,6 +48,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "/confirmation", method = RequestMethod.GET)
     public String getConfirmation(SessionStatus status) {
+        userDao.create((User) session.getAttribute("reg"));
         status.setComplete(); //обнулить сесию
         return "login";
     }
